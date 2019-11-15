@@ -63,7 +63,6 @@ class Twitter:
 
     def post_tweet(self, tweet):
         self.api.update_status(tweet)
-        time.sleep(30)
 
     def post_tweet_with_media(self, tweet, media_url):
         print("Downloading media...")
