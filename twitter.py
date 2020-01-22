@@ -25,18 +25,19 @@ class Twitter:
                 message = dm[x].message_create['message_data']['text']
                 message_data = str(dm[x].message_create['message_data'])
                 json_data = _json.encode_basestring(message_data)
+                print(json_data)
                 print("Getting message -> "+str(message)+" by sender id "+str(sender_id))
 
                 if "attachment" not in json_data:
                     print("Dm does not have any media...")
-                    d = dict(message=message, sender_id=sender_id, id=dm[x].id, media = None)
+                    d = dict(message=message, sender_id=sender_id, id=dm[x].id, media = None, shorted_media_url = None)
                     dms.append(d)
                     dms.reverse()
 
                 else:
                     print("Dm have an attachment..")
                     attachment = dm[x].message_create['message_data']['attachment']
-                    d = dict(message=message, sender_id=sender_id, id=dm[x].id, media = attachment['media']['media_url'])
+                    d = dict(message=message, sender_id=sender_id, id=dm[x].id, media = attachment['media']['media_url'], shorted_media_url = attachment['media']['url'])
                     dms.append(d)
                     dms.reverse()
 
@@ -64,17 +65,28 @@ class Twitter:
     def post_tweet(self, tweet):
         self.api.update_status(tweet)
 
-    def post_tweet_with_media(self, tweet, media_url):
-        print("Downloading media...")
-        arr = str(media_url).split('/')
-        auth = OAuth1(client_key= constants.CONSUMER_KEY,
-                      client_secret= constants.CONSUMER_SCRET,
-                      resource_owner_secret= constants.ACCESS_SECRET,
-                      resource_owner_key= constants.ACCESS_KEY)
-        r = requests.get(media_url, auth = auth)
-        with open(arr[9], 'wb') as f:
-            f.write(r.content)
-        print("Media downloaded successfully!")
-        self.api.update_with_media(filename= arr[9], status = tweet)
-        os.remove(arr[9])
-        print("Upload with media success!")
+    def post_tweet_with_media(self, tweet, media_url, shorted_media_url):
+        try:
+            print("shorted url" + shorted_media_url)
+            print("Downloading media...")
+            arr = str(media_url).split('/')
+            auth = OAuth1(client_key= constants.CONSUMER_KEY,
+                          client_secret= constants.CONSUMER_SCRET,
+                          resource_owner_secret= constants.ACCESS_SECRET,
+                          resource_owner_key= constants.ACCESS_KEY)
+            r = requests.get(media_url, auth = auth)
+            with open(arr[len(arr)-1], 'wb') as f:
+                f.write(r.content)
+
+            print("Media downloaded successfully!")
+            if shorted_media_url in tweet:
+                tweet = tweet.replace(shorted_media_url, "")
+            else:
+                print("kagak ada")
+
+            self.api.update_with_media(filename= arr[len(arr)-1], status = tweet)
+            os.remove(arr[len(arr)-1])
+            print("Upload with media success!")
+        except Exception as e:
+            print(e)
+            pass
