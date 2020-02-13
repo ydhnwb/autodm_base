@@ -29,12 +29,9 @@ def start():
                                 print(dms[i]['shorted_media_url'])
                                 tw.post_tweet_with_media(message, dms[i]['media'],dms[i]['shorted_media_url'])
                                 tw.delete_dm(id)
-
                         else:
                             print("DM deleted because its empty..")
                             tw.delete_dm(id)
-
-
                     else:
                         print("DM will be deleted because does not contains keyword..")
                         tw.delete_dm(id)
