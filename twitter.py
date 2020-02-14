@@ -63,7 +63,11 @@ class Twitter:
 
 
     def post_tweet(self, tweet):
-        self.api.update_status(tweet)
+        try:
+            self.api.update_status(tweet)
+        except Exception as e:
+            print(e)
+            pass
 
     def post_tweet_with_media(self, tweet, media_url, shorted_media_url):
         try:
