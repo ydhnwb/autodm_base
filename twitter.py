@@ -111,11 +111,16 @@ class Twitter:
             else:
                 print("kagak ada")
             if type == 'video':
-                videoTweet = VideoTweet(arr)
-                videoTweet.upload_init()
-                videoTweet.upload_append()
-                videoTweet.upload_finalize()
-                videoTweet.tweet(tweet)
+                try:
+                    videoTweet = VideoTweet(arr)
+                    videoTweet.upload_init()
+                    videoTweet.upload_append()
+                    videoTweet.upload_finalize()
+                    videoTweet.tweet(tweet)
+                except ValueError as v:
+                    print(v)
+                    print("Exception happen")
+                    pass
             elif type == 'photo':
                 self.api.update_with_media(filename=arr, status=tweet)
             os.remove(arr)

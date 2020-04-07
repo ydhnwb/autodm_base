@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-
 import json
 import requests
 from requests_oauthlib import OAuth1
@@ -69,14 +68,14 @@ class VideoTweet(object):
             if req.status_code < 200 or req.status_code > 299:
                 print(req.status_code)
                 print(req.text)
-                sys.exit(0)
-
-            segment_id = segment_id + 1
-            bytes_sent = file.tell()
-
-            print('%s of %s bytes uploaded' % (str(bytes_sent), str(self.total_bytes)))
-
-        print('Upload chunks complete.')
+                print("Getting error status code")
+                return False
+            else:
+                segment_id = segment_id + 1
+                bytes_sent = file.tell()
+                print('%s of %s bytes uploaded' % (str(bytes_sent), str(self.total_bytes)))
+                print('Upload chunks complete.')
+                return True
 
     def upload_finalize(self):
         '''
@@ -93,6 +92,7 @@ class VideoTweet(object):
         print(req.json())
 
         self.processing_info = req.json().get('processing_info', None)
+        print(self.processing_info)
         self.check_status()
 
     def check_status(self):
@@ -110,7 +110,7 @@ class VideoTweet(object):
             return
 
         if state == u'failed':
-            sys.exit(0)
+            raise ValueError("Upload failed")
 
         check_after_secs = self.processing_info['check_after_secs']
 
