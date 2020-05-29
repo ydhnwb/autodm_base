@@ -43,3 +43,5 @@ run app.py using syntax: python app.py <br>
 run app.py using syntax: python3 app.py <br>
 (if you have some problem with library, run this: pip install -r requirement.txt)
 
+# Bugs
+- I dont know why but the video sometimes uploaded, sometimes it doesnt. Like 60-70% successfully uploaded. Very hard to debug
