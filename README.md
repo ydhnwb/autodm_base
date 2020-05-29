@@ -4,7 +4,7 @@ This is a twitter bot that works like others auto base account (tubirfess, askme
 ## Please read!
 - If you want some insight of this repo look likes, please go to my tutorial https://www.youtube.com/watch?v=_U5Uhf4odss <br>
 - I've created some comment in the code.
-- Please user python version 3.x
+- Please use python version 3.x
 
 # Example
 - Example of how this bot works you can see here https://twitter.com/txtdrinstitusi <br>
