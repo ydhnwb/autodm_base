@@ -8,6 +8,7 @@ This is a twitter bot that works like others auto base account (tubirfess, askme
 
 # Example
 - Example of how this bot works you can see here https://twitter.com/txtdrinstitusi <br>
+- or here with some little changes https://twitter.com/imgprocessing <br>
 - Screenshot (I use other keyword in this case: 'txt')
 
 
@@ -39,6 +40,6 @@ run app.py using syntax: python app.py <br>
 -> open terminal, go to this project's directory <br>
 -> source env_linux/bin/activate <br>
 
-run app.py using syntax: pytho3 app.py <br>
+run app.py using syntax: python3 app.py <br>
 (if you have some problem with library, run this: pip install -r requirement.txt)
 
