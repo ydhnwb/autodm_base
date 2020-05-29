@@ -1,8 +1,6 @@
 from twitter import Twitter
 import time
 
-#test pancing ke heroku supaya keluar dyno
-#test kedua pancing worker supaya muncul...
 
 tw = Twitter()
 
@@ -13,10 +11,14 @@ def start():
         if len(dms) is not 0:
             for i in range(len(dms)):
                 message = dms[i]['message']
+                # I take sender_id just in case you want to know who's sent the message
                 sender_id = dms[i]['sender_id']
                 id = dms[i]['id']
 
                 if len(message) is not 0 and len(message) < 280:
+                    # prikitiw is the keyword
+                    # if you want to turn off the case sensitive like: priktiw, Prikitiw, pRiKiTiw
+                    # just use lower(message) and check it, but please remove the replace function line
                     if "prikitiw" in message:
                         message = message.replace("prikitiw", "")
                         if len(message) is not 0:
@@ -41,7 +43,7 @@ def start():
         else:
             print("Direct message is empty...")
             dms = tw.read_dm()
-            if len(dms) is 0:
+            if len(dms) is 0 or dms is None:
                 time.sleep(60)
 
 if __name__ == "__main__":

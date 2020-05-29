@@ -7,14 +7,18 @@ import requests
 import os
 from async_upload import VideoTweet
 
+
+# This class is a bunch of twitter function
 class Twitter:
+
+    # Initializing tweepy
     def __init__(self):
         print("initializing twitter....")
         self.inits = tweepy.OAuthHandler(constants.CONSUMER_KEY, constants.CONSUMER_SCRET)
         self.inits.set_access_token(constants.ACCESS_KEY, constants.ACCESS_SECRET)
         self.api = tweepy.API(self.inits)
 
-
+    # Read all direct message, REMEMBER! only last month DM will be get
     def read_dm(self):
         print("Get direct messages...")
         dms = list()
@@ -40,15 +44,17 @@ class Twitter:
                     media_type = dm[x].message_create['message_data']['attachment']['media']['type']
                     print(media_type)
                     if media_type == 'photo':
-                        print("Is a photo")
                         attachment = dm[x].message_create['message_data']['attachment']
                         d = dict(message=message, sender_id=sender_id, id=dm[x].id, media = attachment['media']['media_url'], shorted_media_url = attachment['media']['url'], type = 'photo')
                         dms.append(d)
                         dms.reverse()
                     elif media_type == 'video':
-                        print("Its a video")
                         attachment = dm[x].message_create['message_data']['attachment']
                         media = dm[x].message_create['message_data']['attachment']['media']
+                        # Here is the things, variants[0] it means this bot will upload the LOW Quality of the video
+                        # variants[1] is for Medium Quality
+                        # and variants[2] is for High Quality
+                        # The better Quality, the probability of failed to upload the video will higher 
                         media_url = media['video_info']['variants'][0]
                         video_url = media_url['url']
                         print("video url : " + str(video_url))
@@ -66,6 +72,7 @@ class Twitter:
             pass
 
 
+    # Delete the message if it doesnt contain a keyword
     def delete_dm(self, id):
         print("Deleting dm with id = "+ str(id))
         try:
@@ -76,14 +83,16 @@ class Twitter:
             time.sleep(40)
             pass
 
-
+    # Post tweet (text only)
     def post_tweet(self, tweet):
         try:
             self.api.update_status(tweet)
         except Exception as e:
             print(e)
             pass
-
+    
+    # Post a tweet with media, (Photo or Video)
+    # If you want to upload some gifs, create a new elif type == 'theTypeOfGifs' 
     def post_tweet_with_media(self, tweet, media_url, shorted_media_url, type):
         try:
             print("shorted url" + shorted_media_url)
@@ -109,7 +118,7 @@ class Twitter:
                 print("shorted url "+ str(shorted_media_url))
                 tweet = tweet.replace(shorted_media_url, "")
             else:
-                print("kagak ada")
+                print("No url in tweet")
             if type == 'video':
                 try:
                     videoTweet = VideoTweet(arr)
