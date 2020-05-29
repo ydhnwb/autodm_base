@@ -12,7 +12,7 @@ This is a twitter bot that works like others auto base account (tubirfess, askme
 
 
 <img src="https://pbs.twimg.com/media/EXwH9O7XkAIlxiD?format=jpg&name=large" width="400" height="600">
-<img src="https://pbs.twimg.com/media/EXwH-VpVAAI1-54?format=jpg&name=large" width="400" height="600">
+<img src="https://pbs.twimg.com/media/EXwH-VpVAAI1-54?format=jpg&name=large" width="400" height="800">
 
 
 
