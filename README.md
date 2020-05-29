@@ -2,7 +2,7 @@
 This is a twitter bot that works like others auto base account (tubirfess, askmenfess etc). Built using python3.
 
 ## Please read!
-- If you one some insight of this repo look likes, please go to my tutorial https://www.youtube.com/watch?v=_U5Uhf4odss <br>
+- If you want some insight of this repo look likes, please go to my tutorial https://www.youtube.com/watch?v=_U5Uhf4odss <br>
 - I've created some comment in the code.
 - Please user python version 3.x
 
