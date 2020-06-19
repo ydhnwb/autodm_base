@@ -7,7 +7,7 @@ This is a twitter bot that works like others auto base account (tubirfess, askme
 - Please use python version 3.x
 
 # Example
-- Example of how this bot works you can see here https://twitter.com/txtdrinstitusi <br>
+- Example of how this bot works you can see here https://twitter.com/txtdrtaurus <br>
 - or here with some little changes https://twitter.com/imgprocessing <br>
 - Screenshot (I use other keyword in this case: 'txt')
 
