@@ -5,6 +5,7 @@ This is a twitter bot that works like others auto base account (tubirfess, askme
 - If you want some insight of this repo look likes, please go to my tutorial https://www.youtube.com/watch?v=_U5Uhf4odss <br>
 - I've created some comment in the code.
 - Please use python version 3.x
+- I've heard that some function is deprecated like "update_status_with_media", I m not maintaining this project again sou you can handle it by yourself.
 
 # Example
 - Example of how this bot works you can see here https://twitter.com/txtdrtaurus <br>
